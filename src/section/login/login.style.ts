@@ -19,4 +19,8 @@ export const FlexColumnContainer = styled.div`
   @media screen and (min-width: 900px) and (max-width: 1200px){
     width: 350px;
   }
-`
+`;
+
+export const TitleWrapper = styled.div`
+  max-width: 90%;    
+`;
