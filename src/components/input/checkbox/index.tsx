@@ -1,20 +1,21 @@
-import React from "react";
-import styled from "styled-components";
-import {color} from "@/config/theme";
+import React, { useState } from 'react';
+import {CheckboxLabel, HiddenCheckbox,StyledCheckbox, CheckmarkAfter} from "@/components/input/checkbox/checkbox.style";
 
-const Checkbox = () => {
-    const CheckboxInput = styled.input`
-      accent-color: ${color.primary};
-      width: 20px;
-      height: 20px;
-      border: 2px solid #8098F9 !important;
-      background: ${color.backgroundLight};
-      border-radius: 3px;
-    `
-    return(
-        <CheckboxInput type={"checkbox"}/>
-    )
 
+const CustomCheckbox = () => {
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
+    };
+
+    return (
+        <CheckboxLabel>
+            <HiddenCheckbox checked={isChecked} onChange={handleCheckboxChange} />
+            <StyledCheckbox />
+            <CheckmarkAfter checked={isChecked}>&#10004;</CheckmarkAfter>
+        </CheckboxLabel>
+    );
 };
 
-export default Checkbox;
+export default CustomCheckbox;
