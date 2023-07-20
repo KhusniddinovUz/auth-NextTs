@@ -1,36 +1,82 @@
-import React, { useRef, useState } from "react";
-// Import Swiper React components
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
+import { Pagination } from "swiper/modules";
+import swiperStyles from "@/section/slider/swiper.module.css";
 import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css/pagination";
+import image1 from "@/assets/slider-image-1.png";
+import image2 from "@/assets/slider-image-2.png";
+import image3 from "@/assets/slider-image-3.png";
+import image4 from "@/assets/slider-image-4.png";
+import image5 from "@/assets/slider-image-5.png";
+import Typography from "@/components/typography";
 
-// import required modules
-import { Navigation } from "swiper/modules";
-
-export default function App() {
+const SliderSection = () => {
   return (
-    <>
-      <Swiper
-        style={{
-          width: "100%",
-          height: "100%",
-        }}
-        navigation={true}
-        modules={[Navigation]}
-        className="mySwiper"
-      >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
-      </Swiper>
-    </>
+    <Swiper
+      spaceBetween={300}
+      pagination={{
+        clickable: true,
+      }}
+      modules={[Pagination]}
+      slidesPerView={1}
+      className={swiperStyles.mySwiper}
+    >
+      <SwiperSlide className={swiperStyles.mySlider}>
+        <img
+          className={swiperStyles.sliderImage}
+          src={image1.src}
+          alt="first"
+        />
+      </SwiperSlide>
+      <SwiperSlide className={swiperStyles.mySlider}>
+        <img
+          className={swiperStyles.sliderImage}
+          src={image2.src}
+          alt="second"
+        />
+      </SwiperSlide>
+      <SwiperSlide className={swiperStyles.mySlider}>
+        <img
+          className={swiperStyles.sliderImage}
+          src={image3.src}
+          alt="third"
+        />
+      </SwiperSlide>
+      <SwiperSlide className={swiperStyles.mySlider}>
+        <img
+          className={swiperStyles.sliderImage}
+          src={image4.src}
+          alt="fourth"
+        />
+      </SwiperSlide>
+      <SwiperSlide className={swiperStyles.mySlider}>
+        <img
+          className={swiperStyles.sliderImage}
+          src={image5.src}
+          alt="fifth"
+        />
+      </SwiperSlide>
+      <div className={swiperStyles.slideText}>
+        <Typography
+          $textSize={"subTitle"}
+          $textWeight={"w_700"}
+          color={"white"}
+          $align={"center"}
+        >
+          Connect with any device
+        </Typography>
+        <Typography
+          $textSize={"paragraph"}
+          $textWeight={"w_600"}
+          color={"white"}
+          $align={"center"}
+        >
+          Everything you need is an internet connection.
+        </Typography>
+      </div>
+    </Swiper>
   );
-}
+};
+
+export default SliderSection;

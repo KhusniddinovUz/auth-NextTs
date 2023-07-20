@@ -2,9 +2,7 @@ import React from "react";
 import LoginSection from "@/section/login";
 
 const Login = () => {
-    return(
-        <LoginSection/>
-    )
+  return <LoginSection />;
 };
 
 export default Login;
