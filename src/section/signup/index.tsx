@@ -8,6 +8,8 @@ import ShieldIcon from "@/components/icons/ShieldIcon";
 import { FlexColumnContainer, TitleWrapper } from "@/section/login/login.style";
 import Typography from "@/components/typography";
 import Checkbox from "@/components/input/checkbox";
+import Link from "next/link";
+
 const SignupSection = () => {
   return (
     <BaseLayout
@@ -84,14 +86,16 @@ const SignupSection = () => {
         >
           You have account?
         </Typography>
-        <Typography
-          $align={"center"}
-          $textSize={"paragraph"}
-          $textWeight={"w_700"}
-          color={"primary"}
-        >
-          Login now
-        </Typography>
+        <Link href={"/login"}>
+          <Typography
+            $align={"center"}
+            $textSize={"paragraph"}
+            $textWeight={"w_700"}
+            color={"primary"}
+          >
+            Login now
+          </Typography>
+        </Link>
       </div>
     </BaseLayout>
   );

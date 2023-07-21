@@ -7,6 +7,7 @@ import ShieldIcon from "@/components/icons/ShieldIcon";
 import Typography from "@/components/typography";
 import Checkbox from "@/components/input/checkbox";
 import { FlexColumnContainer, TitleWrapper } from "@/section/login/login.style";
+import Link from "next/link";
 
 const LoginSection = () => {
   return (
@@ -46,14 +47,16 @@ const LoginSection = () => {
             Remember me
           </Typography>
         </div>
-        <Typography
-          $textSize={"paragraph"}
-          $textWeight={"w_600"}
-          color={"primary"}
-          $align={"right"}
-        >
-          Forgot Password?
-        </Typography>
+        <Link href={"/forgot-password"}>
+          <Typography
+            $textSize={"paragraph"}
+            $textWeight={"w_600"}
+            color={"primary"}
+            $align={"right"}
+          >
+            Forgot Password?
+          </Typography>
+        </Link>
       </FlexColumnContainer>
       <Button color="white" $backgroundcolor="primary">
         LOG IN
@@ -67,14 +70,16 @@ const LoginSection = () => {
         >
           Don't have account?
         </Typography>
-        <Typography
-          $align={"center"}
-          $textSize={"paragraph"}
-          $textWeight={"w_700"}
-          color={"primary"}
-        >
-          Create an account
-        </Typography>
+        <Link href={"/signup"}>
+          <Typography
+            $align={"center"}
+            $textSize={"paragraph"}
+            $textWeight={"w_700"}
+            color={"primary"}
+          >
+            Create an account
+          </Typography>
+        </Link>
       </div>
     </BaseLayout>
   );
