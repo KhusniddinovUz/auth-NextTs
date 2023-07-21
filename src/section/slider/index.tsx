@@ -71,6 +71,7 @@ const SliderSection = () => {
           $textWeight={"w_600"}
           color={"white"}
           $align={"center"}
+          $opacity={0.75}
         >
           Everything you need is an internet connection.
         </Typography>
