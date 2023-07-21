@@ -8,14 +8,16 @@ import SliderSection from "@/section/slider";
 
 interface JSXElement {
   children: React.ReactNode;
+  title: string;
+  subTitle: string;
 }
 
-const BaseLayout = ({ children }: JSXElement) => {
+const BaseLayout = ({ children, title, subTitle }: JSXElement) => {
   return (
     <BaseLayoutElement>
       <InputContainer>{children}</InputContainer>
       <SliderContainer>
-        <SliderSection />
+        <SliderSection title={title} subTitle={subTitle} />
       </SliderContainer>
     </BaseLayoutElement>
   );

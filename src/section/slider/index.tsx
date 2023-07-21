@@ -11,7 +11,12 @@ import image4 from "@/assets/slider-image-4.png";
 import image5 from "@/assets/slider-image-5.png";
 import Typography from "@/components/typography";
 
-const SliderSection = () => {
+interface SliderProps {
+  title: string;
+  subTitle: string;
+}
+
+const SliderSection = (props: SliderProps) => {
   return (
     <Swiper
       spaceBetween={300}
@@ -64,7 +69,7 @@ const SliderSection = () => {
           color={"white"}
           $align={"center"}
         >
-          Connect with any device
+          {props.title}
         </Typography>
         <Typography
           $textSize={"paragraph"}
@@ -73,7 +78,7 @@ const SliderSection = () => {
           $align={"center"}
           $opacity={0.75}
         >
-          Everything you need is an internet connection.
+          {props.subTitle}
         </Typography>
       </div>
     </Swiper>
