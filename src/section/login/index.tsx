@@ -10,6 +10,7 @@ import Typography from "@/components/typography";
 import Checkbox from "@/components/input/checkbox";
 import { FlexColumnContainer, TitleWrapper } from "@/section/login/login.style";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useLoginUserMutation } from "@/store/actions/auth";
 import toast from "react-hot-toast";
 import { errorHandle } from "@/utils/errorHandle";
@@ -21,11 +22,13 @@ const LoginSection = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mutation, res] = useLoginUserMutation();
+  const router = useRouter();
   const loginHandler = () => {
     mutation({ email, password })
       .unwrap()
       .then(() => {
         toast.success("Successfully logged in");
+        router.push("/");
       })
       .catch((error) => {
         errorHandle(error.data);
