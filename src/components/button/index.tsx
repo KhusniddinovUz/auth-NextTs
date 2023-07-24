@@ -1,14 +1,27 @@
 import React from "react";
-import {ButtonMain, ButtonMainProps} from "@/components/button/button.style";
+import { ButtonMain, ButtonMainProps } from "@/components/button/button.style";
 
-interface IButtonProps extends ButtonMainProps{
-    children: React.ReactNode
+interface IButtonProps
+  extends ButtonMainProps,
+    Omit<React.HTMLAttributes<HTMLButtonElement>, "color"> {
+  children: React.ReactNode;
 }
 
-const Button = (props:IButtonProps) =>{
-    return <ButtonMain color={props.color} $backgroundcolor={props.$backgroundcolor}>
-        {props.children}
+const Button = ({
+  color,
+  $backgroundcolor,
+  children,
+  ...otherProps
+}: IButtonProps) => {
+  return (
+    <ButtonMain
+      color={color}
+      $backgroundcolor={$backgroundcolor}
+      {...otherProps}
+    >
+      {children}
     </ButtonMain>
+  );
 };
 
 export default Button;

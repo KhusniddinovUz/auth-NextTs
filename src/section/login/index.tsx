@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import BaseLayout from "@/layouts/base-layout";
 import Input from "@/components/input";
 import Button from "@/components/button";
@@ -8,8 +10,28 @@ import Typography from "@/components/typography";
 import Checkbox from "@/components/input/checkbox";
 import { FlexColumnContainer, TitleWrapper } from "@/section/login/login.style";
 import Link from "next/link";
+import { useLoginUserMutation } from "@/store/actions/auth";
+import toast from "react-hot-toast";
+import { errorHandle } from "@/utils/errorHandle";
+import Loader from "@/utils/loader";
+import useTypedSelector from "@/hooks/useTypedSelector";
 
 const LoginSection = () => {
+  const loading = useTypedSelector((state) => state.auth.loading);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [mutation, res] = useLoginUserMutation();
+  const loginHandler = () => {
+    mutation({ email, password })
+      .unwrap()
+      .then(() => {
+        toast.success("Successfully logged in");
+      })
+      .catch((error) => {
+        errorHandle(error.data);
+      });
+  };
+
   return (
     <BaseLayout
       title={"Connect with any device."}
@@ -33,8 +55,20 @@ const LoginSection = () => {
           Welcome back! Select method to log in!
         </Typography>
       </TitleWrapper>
-      <Input icon={<EnvelopeIcon />} placeholder="Email" $marginTop={"25px"} />
-      <Input icon={<ShieldIcon />} placeholder="Password" $marginTop={"10px"} />
+      <Input
+        onChange={(e) => setEmail(e.currentTarget.value)}
+        icon={<EnvelopeIcon />}
+        placeholder="Email"
+        $marginTop={"25px"}
+      />
+      <Input
+        onChange={(e) => {
+          setPassword(e.currentTarget.value);
+        }}
+        icon={<ShieldIcon />}
+        placeholder="Password"
+        $marginTop={"10px"}
+      />
       <FlexColumnContainer>
         <div className="flex-center-row">
           <Checkbox />
@@ -58,8 +92,8 @@ const LoginSection = () => {
           </Typography>
         </Link>
       </FlexColumnContainer>
-      <Button color="white" $backgroundcolor="primary">
-        LOG IN
+      <Button onClick={loginHandler} color="white" $backgroundcolor="primary">
+        {loading ? <Loader /> : "LOG IN"}
       </Button>
       <div className="flex-center-row">
         <Typography
