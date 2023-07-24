@@ -21,7 +21,7 @@ const LoginSection = () => {
   const loading = useTypedSelector((state) => state.auth.loading);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [mutation, res] = useLoginUserMutation();
+  const [mutation] = useLoginUserMutation();
   const router = useRouter();
   const loginHandler = () => {
     mutation({ email, password })

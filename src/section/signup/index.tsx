@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import BaseLayout from "@/layouts/base-layout";
 import Button from "@/components/button";
 import Input from "@/components/input";
@@ -9,8 +11,38 @@ import { FlexColumnContainer, TitleWrapper } from "@/section/login/login.style";
 import Typography from "@/components/typography";
 import Checkbox from "@/components/input/checkbox";
 import Link from "next/link";
+import { useSignupUserMutation } from "@/store/actions/auth";
+import useTypedSelector from "@/hooks/useTypedSelector";
+import { useRouter } from "next/navigation";
+import { errorHandle } from "@/utils/errorHandle";
+import toast from "react-hot-toast";
+import { Simulate } from "react-dom/test-utils";
+import Loader from "@/utils/loader";
 
 const SignupSection = () => {
+  const loading = useTypedSelector((state) => state.auth.loading);
+  const router = useRouter();
+  const [mutation] = useSignupUserMutation();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const signupHandler = () => {
+    if (password1 !== password2) {
+      errorHandle("Passwords do not match");
+    } else {
+      mutation({ username, email, password: password1 })
+        .unwrap()
+        .then(() => {
+          toast.success("Successfully signed up");
+          router.push("/");
+        })
+        .catch((error) => {
+          errorHandle(error.data);
+        });
+    }
+  };
+
   return (
     <BaseLayout
       title={"Join us!"}
@@ -35,21 +67,33 @@ const SignupSection = () => {
         </Typography>
       </TitleWrapper>
       <Input
+        onChange={(e) => {
+          setUsername(e.currentTarget.value);
+        }}
         icon={<PersonIcon />}
         placeholder={"Username"}
         $marginTop={"25px"}
       />
       <Input
+        onChange={(e) => {
+          setEmail(e.currentTarget.value);
+        }}
         icon={<EnvelopeIcon />}
         placeholder={"Email"}
         $marginTop={"10px"}
       />
       <Input
+        onChange={(e) => {
+          setPassword1(e.currentTarget.value);
+        }}
         icon={<ShieldIcon />}
         placeholder={"Password"}
         $marginTop={"10px"}
       />
       <Input
+        onChange={(e) => {
+          setPassword2(e.currentTarget.value);
+        }}
         icon={<ShieldIcon />}
         placeholder={"Confirm Password"}
         $marginTop={"10px"}
@@ -74,8 +118,12 @@ const SignupSection = () => {
           </Typography>
         </div>
       </FlexColumnContainer>
-      <Button color={"white"} $backgroundcolor={"primary"}>
-        SIGNUP
+      <Button
+        onClick={signupHandler}
+        color={"white"}
+        $backgroundcolor={"primary"}
+      >
+        {loading ? <Loader /> : "SIGNUP"}
       </Button>
       <div className="flex-center-row">
         <Typography

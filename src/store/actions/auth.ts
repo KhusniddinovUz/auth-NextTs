@@ -5,6 +5,12 @@ interface loginUserProps {
   password: string;
 }
 
+interface signupUserProps {
+  username: string;
+  email: string;
+  password: string;
+}
+
 export interface user {
   token: string;
   user: {
@@ -31,7 +37,14 @@ export const authApi = baseApi.injectEndpoints({
         body: { username: email, password },
       }),
     }),
+    signupUser: mutation<user, signupUserProps>({
+      query: ({ username, email, password }) => ({
+        url: "/api/register/",
+        method: "POST",
+        body: { username, email, password },
+      }),
+    }),
   }),
 });
 
-export const { useLoginUserMutation } = authApi;
+export const { useLoginUserMutation, useSignupUserMutation } = authApi;

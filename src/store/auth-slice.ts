@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { authApi, user } from "@/store/actions/auth";
+import { createSlice } from "@reduxjs/toolkit";
+import { authApi } from "@/store/actions/auth";
 
 export interface AuthState {
   isAuth: boolean;
@@ -40,6 +40,32 @@ export const authSlice = createSlice({
     );
     builder.addMatcher(
       authApi.endpoints.loginUser.matchRejected,
+      (state, action) => {
+        state.isAuth = false;
+        state.token = undefined;
+        state.username = undefined;
+        state.email = undefined;
+        state.loading = false;
+      },
+    );
+    builder.addMatcher(
+      authApi.endpoints.signupUser.matchPending,
+      (state, action) => {
+        state.loading = true;
+      },
+    );
+    builder.addMatcher(
+      authApi.endpoints.signupUser.matchFulfilled,
+      (state, action) => {
+        state.loading = false;
+        state.isAuth = true;
+        state.token = action.payload.token;
+        state.email = action.payload.user.email;
+        state.username = action.payload.user.username;
+      },
+    );
+    builder.addMatcher(
+      authApi.endpoints.signupUser.matchRejected,
       (state, action) => {
         state.isAuth = false;
         state.token = undefined;

@@ -5,6 +5,8 @@ export const errorHandle = (error: any) => {
     toast.error(error);
   } else if (error.username) {
     toast.error(`Email: ${error.username}`);
+  } else if (error.email) {
+    toast.error(`Email: ${error.username}`);
   } else if (error.password) {
     toast.error(`Password: ${error.password}`);
   } else if (error.non_field_errors) {
