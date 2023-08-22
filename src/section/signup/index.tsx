@@ -31,15 +31,15 @@ const SignupSection = () => {
     if (password1 !== password2) {
       errorHandle("Passwords do not match");
     } else {
-      mutation({ username, email, password: password1 })
-        .unwrap()
-        .then(() => {
-          toast.success("Successfully signed up");
-          router.push("/");
-        })
-        .catch((error) => {
-          errorHandle(error.data);
-        });
+      mutation({ username, email, password: password1 });
+      // .unwrap()
+      // .then(() => {
+      //   toast.success("Successfully signed up");
+      //   router.push("/");
+      // })
+      // .catch((error) => {
+      //   errorHandle(error.data);
+      // });
     }
   };
 

@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import useTypedSelector from "@/hooks/useTypedSelector";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const isAuth = useTypedSelector((state) => state.auth.isAuth);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isAuth) {
+      router.push("/signup");
+    }
+  }, []);
+
   return (
     <div
       style={{

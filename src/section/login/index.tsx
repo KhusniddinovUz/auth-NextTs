@@ -24,15 +24,15 @@ const LoginSection = () => {
   const [mutation] = useLoginUserMutation();
   const router = useRouter();
   const loginHandler = () => {
-    mutation({ email, password })
-      .unwrap()
-      .then(() => {
-        toast.success("Successfully logged in");
-        router.push("/");
-      })
-      .catch((error) => {
-        errorHandle(error.data);
-      });
+    mutation({ email, password });
+    // .unwrap()
+    // .then(() => {
+    //   toast.success("Successfully logged in");
+    //   router.push("/");
+    // })
+    // .catch((error) => {
+    //   errorHandle(error.data);
+    // });
   };
 
   return (
